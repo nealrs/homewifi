@@ -62,7 +62,7 @@
 
         <p class="header"><img src="{{ url_for('static', filename='img/wifi_512.png') }}"></p>
         <h1>Welcome to Home WiFi</h1>
-        <p>Please login to update your WiFi network name and password.</p>
+        <p>Login to update your WiFi network name and password.</p>
         
         <!-- More Amazon Login stuff-->
         <a href="#" id="LoginWithAmazon">
@@ -75,10 +75,38 @@
             document.getElementById('LoginWithAmazon').onclick = function() {
                 options = { scope : 'profile', popup: "False"};
                 amazon.Login.authorize(options, 'https://homewifi.herokuapp.com/handle_login');
+                //amazon.Login.authorize(options, 'https://nealrs.ngrok.io/handle_login');
                 return false;
             };
         </script>
         <!-- END More Amazon Login stuff-->
+
+        <h1>FAQ &amp; Privacy Policy</h1>
+        <!--<p>Say <span class="italic">"Alexa, enable Home WiFi"</span> or <a href="#">click here</a> to install.</p>-->
+        <h2>What does Home WiFi do?</h2>
+        <p>Home WiFi is an Alexa Skill that learns and remembers your WiFi password, so you don't have to.</p>
+
+        <h2>How does it actually do that?</h2>
+        <p>1. Log in above to enter your WiFi network name and password.</p>
+        <p>2. Enable our <a href="#">Alexa skill</a> and link it to your Home WiFi account using your Amazon account.</p>
+        <p>3. Say "Alexa, open Home WiFi" and listen as Alexa spells out your wireless network name and password for visitors. You can also access the information in your Alexa smartphone app.</p>
+
+        <!--<h2>What about my privacy and personal data!?</h2>
+        <p>The whole point of this is to help you be <span class="italic">more</span> secure online. So no, we'll never intentionally share, leak, sell, or store your personal information.</p>
+        
+        <p>And when you unlink or uninstall the Skill, we immediately lose access to your name and email.</p>
+        -->
+        <h2>What are your ToS?</h2>
+        <p>Look, I'm not a lawyer. <a href="https://nealshyam.com">I'm just a guy</a> who likes to <a href="https://devpost.com/nealrs">write code</a>. This software and service are provided without any gaurantees or liability &mdash; but <a href="https://github.com/nealrs/homewifi">it's open sourced under MIT</a>, so feel free to audit the code or send me a pull request.</p>
+
+        <p>If you like this skill, please leave a nice review and <a href="https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dalexa-skills&field-keywords=neal+shyam">check out my other skills</a>. If you don't, tell me how to make it better.</p>
+
+        <h2>You're good at this, can I hire you?</h2>
+        <p>Yep. <a href="mailto:nealrs+hackme@gmail.com?subject=Heyyy">Let's talk</a>.</p>
+    
+        <h2>That's a nice icon, where did you get it?</h2>
+        <p>I got it from <a href="https://icons8.com/icon/42849/security-checked">Icons8.com</a>. They have tons of great icons.</p>
+
 
         <hr>
         <p>&copy; 2017 <a href="https://nealshyam.com">Neal Shyam</a>

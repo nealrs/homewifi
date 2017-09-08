@@ -42,6 +42,9 @@
                 max-width:600px; 
                 padding: 0 1.5rem;
             }
+            .highlight{
+                /*color:darkcyan;*/
+            }
         </style>
     </head>
     <body>
@@ -62,7 +65,12 @@
 
         <p class="header"><img src="{{ url_for('static', filename='img/wifi_512.png') }}"></p>
         <h1>Hi {{session.name}}!</h1>
-        <p>Please update your WiFi network name &amp; password below and then <a href="#">install our Alexa Skill</a>.</p>
+
+        {% if updated is not none%}
+        <p><span class="highlight">Thanks for updating your WiFi info!</span> Don't forget to <a href="#">install our Alexa Skill</a>.</p>
+        {% else %}
+            <p>Please update your WiFi info below and <a href="#">install our Alexa Skill</a>.</p>
+        {%endif %}
 
         <form action="/update" method="post">
             <p><label for="ssid">WiFi Network:</label>

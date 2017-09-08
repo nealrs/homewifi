@@ -118,12 +118,9 @@ def getUser(token):
 
 
 
+
+
 @app.route("/", methods=["GET", "POST"])
-def index():
-    return render_template('privacy.html')
-
-
-@app.route("/login", methods=["GET", "POST"])
 def login():
     if 'userId' in session:
         return redirect(url_for("home", _scheme="https", _external=True))
@@ -157,7 +154,12 @@ def handle_login():
 @app.route("/home", methods=["GET", "POST"])
 def home():
     user =  db_get_user(session['userId'])
-
+    
+    if 'updated' in session:
+        updated = session['updated']
+        session['updated'] = None
+    else:
+        updated = None
     """print "**"
     print user.userId
     print user.signup
@@ -168,7 +170,7 @@ def home():
 
     ssid = user.ssid
     wifi = user.wifi
-    return render_template('home.html', ssid=ssid, wifi=wifi)
+    return render_template('home.html', ssid=ssid, wifi=wifi, updated=updated)
 
 @app.route("/update", methods=["GET", "POST"])
 def update():
@@ -190,8 +192,10 @@ def update():
         print "updating db!"
         result = db_update_user(user.userId, ssid, wifi)
         print result
+        session['updated']=True
     else: 
         print "wifi/pass match, so no need to update db"
+        session['updated']=None
 
     return redirect(url_for("home", _scheme="https", _external=True))
 
