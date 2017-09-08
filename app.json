@@ -2,7 +2,7 @@
   "name": "Home WiFi",
   "description": "an Alexa Skill that knows your wifi password",
   "image": "heroku/python",
-  "repository": "https://github.com/nealrs/wifialexa",
+  "repository": "https://github.com/nealrs/homewifi",
   "keywords": ["python", "flask", "alexa", "alexa skills kit", "infosec" ],
   "buildpacks": [
     {

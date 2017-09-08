@@ -3,3 +3,6 @@ Flask==0.12.2
 gunicorn==0.14.2
 flask-ask==0.9.6
 flask_sslify==0.1.5
+peewee==2.10.1
+flask-peewee==0.6.7
+MySQL-python==1.2.5
