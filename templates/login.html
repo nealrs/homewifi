@@ -74,7 +74,7 @@
         <script type="text/javascript">
             document.getElementById('LoginWithAmazon').onclick = function() {
                 options = { scope : 'profile', popup: "False"};
-                amazon.Login.authorize(options, 'https://nealrs.ngrok.io/handle_login');
+                amazon.Login.authorize(options, 'https://homewifi.herokuapp.com/handle_login');
                 return false;
             };
         </script>
