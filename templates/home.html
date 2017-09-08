@@ -1,0 +1,93 @@
+<!doctype html>  
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Home WiFi &middot; An Alexa Skill that remembers your WiFi Password, so you don't have too.</title>
+        <meta name="description" content="Install this Alexa Skill and let your visitors figure out the WiFi for themselves.">
+        <meta name="author" content="Neal Shyam">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/wifi_512.png') }}"> 
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/wifi_512.png') }}"> 
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400,300i,400i" rel="stylesheet">        
+        <style>
+            h1{
+                Font-Family: 'Raleway', Sans-Serif;
+                Font-Size: 2rem;
+            }
+            h2 {
+                Font-Family: 'Raleway', Sans-Serif;
+                Font-Size: 1.5rem;
+            }
+            p {
+                Font-Family: 'Open Sans', Sans-Serif;
+                Font-Size: 1rem;
+                line-height: 1.5rem;
+            }
+            a {
+                color: #60813f
+            }
+            .italic{
+                font-style:italic;
+            }
+            .header{
+                text-align:center;
+                margin-top:.5rem;
+            }
+            .header img{
+                max-height:150px; 
+                min-height:80px;
+            }
+            body{
+                margin:auto; 
+                max-width:600px; 
+                padding: 0 1.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Amazon Login SDK-->
+        <div id="amazon-root"></div>
+        <script type="text/javascript">    
+            window.onAmazonLoginReady = function() {
+                amazon.Login.setClientId('amzn1.application-oa2-client.6d665883454849458c19054557525c71');
+            };
+            (function(d) {
+                var a = d.createElement('script'); a.type = 'text/javascript';
+                a.async = true; a.id = 'amazon-login-sdk';
+                a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+                d.getElementById('amazon-root').appendChild(a);
+            })(document);
+        </script>
+        <!-- END Amazon Login SDK-->
+
+        <p class="header"><img src="{{ url_for('static', filename='img/wifi_512.png') }}"></p>
+        <h1>Hi {{session.name}}!</h1>
+        <p>Please update your WiFi network name &amp; password below and then <a href="#">install our Alexa Skill</a>.</p>
+
+        <form action="/update" method="post">
+            <p><label for="ssid">WiFi Network:</label>
+            <input id="ssid" type="text" name="ssid" required value="{% if ssid is not none %}{{ ssid }}{% else %}{%endif %}" placeholder="prettyflyforawifi"></p>
+
+            <p><label for="wifi">WiFi Password:</label>
+            <input id="wifi" type="text" name="wifi" required value="{% if wifi is not none %}{{ wifi }}{% else %}{%endif %}" placeholder="sUp3r$3kr1t"></p>
+
+            <input type="submit" value="Update">
+            <button type="button" id="logout">Log out</button>
+        </form>
+        
+        <!-- More Amazon Login stuff-->
+        <!--<a id="Logout">Logout</a>-->
+        <script type="text/javascript">
+            document.getElementById('logout').onclick = function() {
+              amazon.Login.logout();
+              console.log('logout?');
+              window.location.href = "/logout";
+
+            };
+        </script>
+        <!-- END More Amazon Login stuff-->
+
+        <hr>
+        <p>&copy; 2017 <a href="https://nealshyam.com">Neal Shyam</a>
+    </body>
+</html>
