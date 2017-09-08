@@ -21,7 +21,6 @@ from datetime import datetime
 from time import gmtime, strftime, mktime
 import subprocess
 from random import randint
-import parsedatetime as pdt
 
 app = Flask(__name__)
 ask = Ask(app, '/')
