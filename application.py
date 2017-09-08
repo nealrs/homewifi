@@ -117,7 +117,7 @@ def getUser(token):
     api = "https://api.amazon.com/user/profile?access_token="+str(token)
     r = requests.get(api)
     user = r.json()
-    #print user
+    print user
     if r.status_code == 200:
         return user['name'], user['email'], user['user_id']
     else: 
@@ -158,9 +158,17 @@ def delete():
     return render_template('deleted.html')
 
 
-@app.route("/handle_login", methods=["GET", "POST"])
-def handle_login():
-    token = request.args.get('access_token')
+@app.route("/handle_login_2/<token>/", methods=["GET", "POST"])
+#@app.route('/app_response_token/', methods=['GET'])
+def handle_login_2(token):
+    #    return token
+    #def handle_login():
+    #print request.url
+    #token = request.args.get('access_token')
+    print "token: "
+    print token
+    logging.debug("token: "+str(token))
+
     name, email, userId  = getUser(token)
     session['name'] = name
     session['email'] = email
@@ -175,6 +183,11 @@ def handle_login():
     """
     #return "ok! name: "+ name +" email: "+ email +", userId: "+ userId, 200
     return redirect(url_for("home", _scheme="https", _external=True))
+
+@app.route("/handle_login", methods=["GET", "POST"])
+def handle_login():
+    return render_template('auth.html')
+    
     
 @app.route("/home", methods=["GET", "POST"])
 def home():

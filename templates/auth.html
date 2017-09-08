@@ -1,0 +1,11 @@
+<html>
+<head>
+    <script type="text/javascript">
+        var str = window.location.href.split("access_token=")[1];
+        var token = str.replace(/&.*/i, '');
+        console.log(token);
+        window.location = "/handle_login_2/" + token;
+    </script>
+
+</head>
+</html>
