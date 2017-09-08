@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="robots" content="noindex">
         <title>Home WiFi &middot; An Alexa Skill that remembers your WiFi Password, so you don't have too.</title>
         <meta name="description" content="Install this Alexa Skill and let your visitors figure out the WiFi for themselves.">
         <meta name="author" content="Neal Shyam">
@@ -79,8 +80,9 @@
             <p><label for="wifi">WiFi Password:</label>
             <input id="wifi" type="text" name="wifi" required value="{% if wifi is not none %}{{ wifi }}{% else %}{%endif %}" placeholder="sUp3r$3kr1t"></p>
 
-            <input type="submit" value="Update">
-            <button type="button" id="logout">Log out</button>
+            <input type="submit" value="Update"> &nbsp;&nbsp;
+            <button type="button" id="logout">Log out</button> &nbsp;&nbsp;
+            <button type="button" id="deleteAccount">Delete my account</button>
         </form>
         
         <!-- More Amazon Login stuff-->
@@ -88,8 +90,18 @@
         <script type="text/javascript">
             document.getElementById('logout').onclick = function() {
               amazon.Login.logout();
-              console.log('logout?');
+              console.log('logout');
               window.location.href = "/logout";
+
+            };
+        </script>
+        <script type="text/javascript">
+            document.getElementById('deleteAccount').onclick = function() {
+              console.log('Delete Account');
+              if (window.confirm("Are you sure you want to delete your Home WiFi account? Press OK to proceed.\n\nDon't forget to unlink the skill in the Alexa smartphone app too.\n\nThanks for trying this out and come back anytime!")) { 
+                window.location.href = "/delete";
+              }
+              
 
             };
         </script>

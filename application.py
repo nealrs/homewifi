@@ -93,6 +93,16 @@ def db_update_user(userId, ssid, wifi):
         return None
 
 
+def db_delete_user(userId):
+    try:
+        with db.atomic():
+            deleted = User.delete().where(User.userId == userId).execute()
+            return deleted
+    except (IntegrityError, DoesNotExist) as e:
+        logging.info("error deleting user: "+str(userid)+" [db_delete_user]")
+        return None
+
+
 # Helper Methods
 def sessionInfo():
     logging.info("User ID: {}".format(ask_session.user.userId))
@@ -133,6 +143,21 @@ def logout():
         session.clear()
     return redirect(url_for("login", _scheme="https", _external=True))
 
+
+@app.route("/delete", methods=["GET", "POST"])
+def delete():
+    if 'userId' in session:
+        deleted =  db_delete_user(session['userId'])
+        print deleted
+        if deleted > 0 :
+            print "userId: "+ session['userId'] + " deleted successfully"
+        else: 
+            print "not able to delete userId: "+ session['userId']
+
+        session.clear()
+    return render_template('deleted.html')
+
+
 @app.route("/handle_login", methods=["GET", "POST"])
 def handle_login():
     token = request.args.get('access_token')
@@ -153,7 +178,10 @@ def handle_login():
     
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    user =  db_get_user(session['userId'])
+    if 'userId' in session:
+        user =  db_get_user(session['userId'])
+    else: 
+        return redirect(url_for("login", _scheme="https", _external=True))
     
     if 'updated' in session:
         updated = session['updated']
