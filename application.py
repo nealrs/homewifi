@@ -124,12 +124,17 @@ def getUser(token):
         print "profile error"
         return None
 
+def spellOut(term):
+    mod = []
+    for t in term:
+        if t.isupper():
+            mod.append("Capital " + t)
+        else: 
+            mod.append(t)
+    return str(mod)
 
 
-
-
-
-
+# FLASK ROUTES
 @app.route("/", methods=["GET", "POST"])
 def login():
     if 'userId' in session:
@@ -266,7 +271,7 @@ def launch():
         wifi = user.wifi
         
         if ssid != "" and wifi != "" and ssid is not None and wifi is not None:
-            speech = "The wireless network name is "+(' '.join(ssid))+", and the password is "+(' '.join(wifi))+"."
+            speech = "The wireless network name is "+spellOut(ssid)+", and the password is "+spellOut(ssid)
             card_title = "Get on the WiFi"
             card_text = "Network: "+ssid+"\nPassword: "+ wifi
             return statement(speech).simple_card(title=card_title, content=card_text)
