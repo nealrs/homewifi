@@ -125,13 +125,15 @@ def getUser(token):
         return None
 
 def spellOut(term):
-    mod = []
+    #tmp = (' '.join(term))
+    mod = ""
     for t in term:
         if t.isupper():
-            mod.append("Capital " + t)
+            add = ("Capital " + t)
         else: 
-            mod.append(t)
-    return str(mod)
+            add = t
+        mod = mod + add + ", "
+    return mod
 
 
 # FLASK ROUTES
