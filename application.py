@@ -273,7 +273,7 @@ def launch():
         wifi = user.wifi
         
         if ssid != "" and wifi != "" and ssid is not None and wifi is not None:
-            speech = "The wireless network name is "+spellOut(ssid)+", and the password is "+spellOut(ssid)
+            speech = "The wireless network name is "+spellOut(ssid)+", and the password is "+spellOut(wifi)
             card_title = "Get on the WiFi"
             card_text = "Network: "+ssid+"\nPassword: "+ wifi
             return statement(speech).simple_card(title=card_title, content=card_text)
