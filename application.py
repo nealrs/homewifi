@@ -33,6 +33,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(mess
 # Account for special characters!
 charmap = {
     "~" : "tilde",
+    " " : "space",
     "`" : "back tick",
     "!" : "exclamation point",
     "@" : "at sign",
