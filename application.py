@@ -30,6 +30,41 @@ app.secret_key = os.urandom(24)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 #logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
+# Account for special characters!
+charmap = {
+    "~" : "tilde",
+    "`" : "back tick",
+    "!" : "exclamation point",
+    "@" : "at sign",
+    "#" : "hash sign",
+    "$" : "dollar sign",
+    "%" : "percent sign",
+    "^" : "carret sign",
+    "&" : "ampersand",
+    "*" : "asterisk",
+    "(" : "left parenthsis",
+    ")" : "right parenthesis",
+    "-" : "dash",
+    "_" : "underscore",
+    "+" : "plus sign",
+    "=" : "equals sign",
+    "{" : "left curly brace",
+    "}" : "right curly brace",
+    "[" : "left square bracket",
+    "]" : "right square bracket",
+    "\\" : "back slash",
+    "|" : "vertical line",
+    ":" : "colon",
+    ";" : "semi colon",
+    "\"" : "back slash",
+    "'" : "apostrophe",
+    "<" : "less than sign",
+    "," : "comma",
+    ">" : "greater than sign",
+    "." : "period",
+    "?" : "question mark",
+    "/" : "forward slash"
+}
 
 #########################################################
 # CONNECT TO REDIS & MYSQL + define ORM
@@ -125,11 +160,12 @@ def getUser(token):
         return None
 
 def spellOut(term):
-    #tmp = (' '.join(term))
     mod = ""
     for t in term:
         if t.isupper():
             add = ("Capital " + t)
+        elif t in charmap:
+            add = charmap[t]
         else: 
             add = t
         mod = mod + add + ", "
